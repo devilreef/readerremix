@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--<meta name="viewport" content="user-scalable=no">-->
+  <link href="remix.css" rel="stylesheet" media="screen" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@400;700&display=swap" rel="stylesheet">
+  <script src="dist/howler.js"></script>
+  <script>
+    var sound = new Howl({
+      src: ['loops/UC_BassGuit_80-A.mp3']
+    });
+    var sound2 = new Howl({
+      src: ['loops/UC_PerpOrgan_80-A.wav']
+    });
+
+    sound.play();
+    sound2.play();
+  </script>
+  <title>Reader Remix</title>
+</head>
+<body>
+  <div id="story">
+    <div id="storydeck">
+      <div class="decklabel">STORY</div>
+    </div>
+  </div>
+  <div id="decks">
+    <div id="deck1" class="deck">
+      <div class="decklabel">DRUMS</div>
+      <div id="np1" class="nowplaying"></div>
+      <div class="mutesolo">
+        <div id="mute1" class="mute">Mute</div>
+        <div id="solo1" class="solo">Solo</div>
+      </div>
+    </div>
+    <div id="deck2" class="deck">
+      <div class="decklabel">BASS</div>
+      <div id="np2" class="nowplaying"></div>
+      <div class="mutesolo">
+        <div id="mute2" class="mute">Mute</div>
+        <div id="solo2" class="solo">Solo</div>
+      </div>
+    </div>
+    <div id="deck3" class="deck">
+      <div class="decklabel">TONES</div>
+      <div id="np1" class="nowplaying"></div>
+      <div class="mutesolo">
+        <div id="mute3" class="mute">Mute</div>
+        <div id="solo3" class="solo">Solo</div>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    <p>Reader Remix is a boilerplate.</p>
+  </div>
+</body>
+</html>
