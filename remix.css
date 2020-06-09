@@ -49,16 +49,28 @@ body {
 .deck {
   width: 30%;
   height: 250px;
-  border: 1px solid blue;
+  border: 4px solid black;
   margin: auto;
   font-family: 'Saira Condensed', sans-serif;
   font-weight: 400;
 }
-
+#deck1 { background-color: #dd5151; }
+#deck2 { background-color: #369386; }
+#deck3 { background-color: #eb942b; }
 .decklabel {
   font-family: 'Saira Condensed', sans-serif;
   font-weight: 700;
   text-align: center;
+}
+
+.nowplaying {
+  width: 80%;
+  border: 1px dotted green;
+}
+
+.next {
+  width: 80%;
+  border: 1px dotted yellow;
 }
 
 .mutesolo {
@@ -77,6 +89,9 @@ body {
   .decklabel {
     font-size: 70px;
   }
+  .next,.nowplaying {
+    font-size: 24px;
+  }
   .mutesolo {
     flex-direction: row;
   }
@@ -90,6 +105,9 @@ body {
 @media only screen and (max-width: 600px) {
   .decklabel {
     font-size: 36px;
+  }
+  .next,.nowplaying {
+    font-size: 14px;
   }
   .mutesolo {
     flex-direction: column;
