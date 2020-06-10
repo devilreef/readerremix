@@ -1,7 +1,7 @@
 let drums = [
-    ['Easy drums', 'UC_Drums_80-01.wav'],
-    ['Heavy drums', 'UC_Drums_80-02.wav'],
-    ['Beast mode', 'UC_Drums_80-03.wav'],
+  ['Easy drums','UC_Drums_80-01.wav'],
+  ['Heavy drums','UC_Drums_80-02.wav'],
+  ['Beast mode','UC_Drums_80-03.wav'],
 ];
 
 let bass = [
@@ -20,8 +20,12 @@ let tones = [
 
 function loopLister(loopPack) {
   let loopHTML = $('<select />');
+  let option = $('<option />');
+  option.attr({value: "silent"});
+  option.text("[silent]");
+  loopHTML.append(option);
   loopPack.forEach(function(loop,index) {
-    let option = $('<option />');
+    option = $('<option />');
     option.attr({value: index});
     option.text(loop[0]);
     loopHTML.append(option);
@@ -33,9 +37,9 @@ function loopLister(loopPack) {
 
 $(document).ready(function() {
     console.log("ready!");
-    $("#np1").text(drums[0][0]);
-    $("#np2").text("Phat bass");
-    $("#np3").text("Nice chimez");
+    $("#np1").text("[choose a loop]");
+    $("#np2").text("[choose a loop]");
+    $("#np3").text("[choose a loop]");
 
     // Build loop select dropdowns
     $("#next1").html(loopLister(drums));
@@ -55,7 +59,6 @@ $(document).ready(function() {
       let nextLoop = $(this).children("option:selected").text();
       $("#np3").text(nextLoop);
     });
-
 });
 
 var sound = new Howl({
