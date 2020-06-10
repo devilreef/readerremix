@@ -54,9 +54,11 @@ body {
   font-family: 'Saira Condensed', sans-serif;
   font-weight: 400;
 }
+
 #deck1 { background-color: #dd5151; }
 #deck2 { background-color: #369386; }
 #deck3 { background-color: #eb942b; }
+
 .decklabel {
   font-family: 'Saira Condensed', sans-serif;
   font-weight: 700;
@@ -73,6 +75,14 @@ body {
   border: 1px dotted yellow;
 }
 
+.next select {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+/*  font-family: 'Saira Condensed', sans-serif;
+  font-weight: 400; */
+}
+
 .mutesolo {
   width: 80%;
   display: flex;
@@ -87,9 +97,9 @@ body {
 
 @media only screen and (min-width: 601px) {
   .decklabel {
-    font-size: 70px;
+    font-size: 60px;
   }
-  .next,.nowplaying {
+   .next,.nowplaying {
     font-size: 24px;
   }
   .mutesolo {
@@ -104,7 +114,7 @@ body {
 /* If the screen size is 600px or less, set the font-size of <div> to 30px */
 @media only screen and (max-width: 600px) {
   .decklabel {
-    font-size: 36px;
+    font-size: 32px;
   }
   .next,.nowplaying {
     font-size: 14px;

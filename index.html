@@ -7,17 +7,8 @@
   <link href="remix.css" rel="stylesheet" media="screen" type="text/css" />
   <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@400;700&display=swap" rel="stylesheet">
   <script src="dist/howler.js"></script>
-  <script>
-    var sound = new Howl({
-      src: ['loops/UC_BassGuit_80-A.mp3']
-    });
-    var sound2 = new Howl({
-      src: ['loops/UC_PerpOrgan_80-A.wav']
-    });
-
-    sound.play();
-    sound2.play();
-  </script>
+  <script src="jquery-3.5.1.js"></script>
+  <script src="remix.js"></script>
   <title>Reader Remix</title>
 </head>
 <body>
@@ -47,7 +38,7 @@
     </div>
     <div id="deck3" class="deck">
       <div class="decklabel">TONES</div>
-      <div id="np1" class="nowplaying">Now Playing</div>
+      <div id="np3" class="nowplaying">Now Playing</div>
       <div id="next3" class="next">Next</div>
       <div class="mutesolo">
         <div id="mute3" class="mute">Mute</div>
