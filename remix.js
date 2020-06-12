@@ -7,7 +7,7 @@ var drums = [
 ];
 
 var bass = [
-  ['A Bass','UC_BassGuit_80}A.mp3'],
+  ['A Bass','UC_BassGuit_80-A.mp3'],
   ['C Bass','UC_BassGuit_80-C.mp3'],
   ['E Bass','UC_BassGuit_80-E.mp3'],
 ];
@@ -21,31 +21,33 @@ var tones = [
 // The name of the folder where the audio is stored
 var loopFolder = "loops";
 
-function loopLister(loopPack) {
+
+// Deck /////////////////////////////////////////////////////////////////////
+// Constructor prepares the audio and the dropdown selector
+
+function Deck(loopPack,selectorDiv) {
+  // loopPack: array of all loops
+  // selectorDiv: id to place loop selector
+  let audio;
+
+  // Prepare root of loop selector
   let loopHTML = $('<select />');
   // First option will be silence
   let option = $('<option />');
   option.attr({value: "silent"});
   option.text("[silent]");
   loopHTML.append(option);
-  // Rest will be from the loop pack
+
+  // For each loop in the pack
   loopPack.forEach(function(loop,index) {
+    // Build the HTML selector options
     option = $('<option />');
     option.attr({value: index});
     option.text(loop[0]);
     loopHTML.append(option);
-  });
-  return loopHTML;
-};
 
-// Deck /////////////////////////////////////////////////////////////////////
-
-function Deck(loopPack) {
-  // loopPack: array of all loops
-  //   each loop is a subarray: (title, filename, audio Howl object)
-  let audio;
-  // For each loop in the pack, load in the audio and add it to the array
-  loopPack.forEach(function(loop,index) {
+    // Each loop will be a subarray: (title, filename, audio Howl object)
+    // Load in the audio and add it to the array
     audio = new Howl({
         src: [loopFolder + '/' + loop[1]]
     });
@@ -53,6 +55,9 @@ function Deck(loopPack) {
   });
   // Store the fully loaded loop pack in the deck object
   this.loopPack = loopPack;
+  // Write the HTML for the selector
+  $(selectorDiv).html(loopHTML);
+
   // Each track starts with nothing cued up
   this.currentTrack = null;
 }
@@ -78,19 +83,14 @@ Deck.prototype.setTrack = function(index) {
 $(document).ready(function() {
     console.log("ready!");
 
-    let deck1 = new Deck(drums);
-    let deck2 = new Deck(bass);
-    let deck3 = new Deck(tones);
+    // Load audio into decks and build loop selector HTML
+    let deck1 = new Deck(drums,"#next1");
+    let deck2 = new Deck(bass,"#next2");
+    let deck3 = new Deck(tones,"#next3");
 
     $("#np1").text("[choose a loop]");
     $("#np2").text("[choose a loop]");
     $("#np3").text("[choose a loop]");
-
-    // Build loop select dropdowns
-    // CHANGEME
-    $("#next1").html(loopLister(drums));
-    $("#next2").html(loopLister(bass));
-    $("#next3").html(loopLister(tones));
 
     // Add handlers for loop change cues
     $("#next1 > select").change(function() {
@@ -109,14 +109,3 @@ $(document).ready(function() {
       $("#np3").text(deck3.trackTitle());
     });
 });
-
-// var sound = new Howl({
-//   src: ['loops/UC_BassGuit_80-A.mp3']
-// });
-
-// var sound2 = new Howl({
-//  src: ['loops/UC_PerpOrgan_80-A.wav']
-// });
-
-// sound.play();
-// sound2.play();
