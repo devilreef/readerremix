@@ -40,7 +40,7 @@ function Deck(loopPack,selectorDiv) {
 
   // For each loop in the pack
   loopPack.forEach(function(loop,index) {
-    // Build the HTML selector options
+    // Build the HTML selector option
     option = $('<option />');
     option.attr({value: index});
     option.text(loop[0]);
@@ -76,7 +76,11 @@ Deck.prototype.setTrack = function(index) {
     this.currentTrack = index;
   }
 };
-
+Deck.prototype.play = function() {
+  if (this.currentTrack !== null) {
+    this.loopPack[this.currentTrack][2].play()
+  }
+}
 
 // Main /////////////////////////////////////////////////////////////////////
 
@@ -107,5 +111,11 @@ $(document).ready(function() {
       let nextLoop = $(this).children("option:selected").attr("value");
       deck3.setTrack(nextLoop);
       $("#np3").text(deck3.trackTitle());
+    });
+
+    $( "#play" ).click(function() {
+      deck1.play();
+      deck2.play();
+      deck3.play();
     });
 });
