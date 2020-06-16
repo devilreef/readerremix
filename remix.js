@@ -21,6 +21,9 @@ var tones = [
 // The name of the folder where the audio is stored
 var loopFolder = "loops";
 
+// The loop length in milliseconds
+var loopLength = 6000;
+
 
 // Deck /////////////////////////////////////////////////////////////////////
 // Constructor prepares the audio and the dropdown selector
@@ -29,6 +32,7 @@ function Deck(loopPack,selectorDiv) {
   // loopPack: array of all loops
   // selectorDiv: id to place loop selector
   let audio;
+  let nowplaying;
 
   // Prepare root of loop selector
   let loopHTML = $('<select />');
@@ -57,7 +61,6 @@ function Deck(loopPack,selectorDiv) {
   this.loopPack = loopPack;
   // Write the HTML for the selector
   $(selectorDiv).html(loopHTML);
-
   // Each track starts with nothing cued up
   this.currentTrack = null;
 }
@@ -78,9 +81,11 @@ Deck.prototype.setTrack = function(index) {
 };
 Deck.prototype.play = function() {
   if (this.currentTrack !== null) {
-    this.loopPack[this.currentTrack][2].play()
+    this.nowplaying = this.loopPack[this.currentTrack][2].play();
+    console.log(this.loopPack[this.currentTrack][2].duration());
   }
 }
+
 
 // Main /////////////////////////////////////////////////////////////////////
 
@@ -91,6 +96,14 @@ $(document).ready(function() {
     let deck1 = new Deck(drums,"#next1");
     let deck2 = new Deck(bass,"#next2");
     let deck3 = new Deck(tones,"#next3");
+    let channel1, channel2, channel3, timerID;
+    let playing = false;
+
+    function scheduler() {
+      deck1.play();
+      deck2.play();
+      deck3.play();
+    }
 
     $("#np1").text("[choose a loop]");
     $("#np2").text("[choose a loop]");
@@ -114,8 +127,17 @@ $(document).ready(function() {
     });
 
     $( "#play" ).click(function() {
-      deck1.play();
-      deck2.play();
-      deck3.play();
+      if (playing) {
+        clearInterval(timerID);
+        playing = false;
+        $("#play").text("PLAY");
+      } else {
+        // Fire the scheduler event
+        scheduler();
+        // and again at the end of each loop
+        timerID = setInterval(scheduler, loopLength);
+        playing = true;
+        $("#play").text("STOP");
+      }
     });
 });
