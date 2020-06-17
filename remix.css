@@ -98,6 +98,20 @@ body {
   border: 1px dotted green;
 }
 
+.progress {
+  background-color: #333333;
+  width: 80%;
+  border: 1px dotted yellow;
+}
+
+.bar {
+  background-color: #66ff66;
+  align-self: right;
+  width: 0%;
+  margin: 0 0 0 auto;
+
+}
+
 .next {
   width: 80%;
   border: 1px dotted yellow;

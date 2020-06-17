@@ -96,13 +96,59 @@ $(document).ready(function() {
     let deck1 = new Deck(drums,"#next1");
     let deck2 = new Deck(bass,"#next2");
     let deck3 = new Deck(tones,"#next3");
-    let channel1, channel2, channel3, timerID;
-    let playing = false;
 
+    let channel1, channel2, channel3, timerID, progressID;
+    let playing = false;
+    // Flags indicate whether to adjust progress bars for each deck
+    let progress1 = false;
+    let progress2 = false;
+    let progress3 = false;
+    let tmpDate, tmpTime, nextLoopPoint, timeLeft, timeLeftString;
+
+    // Calculate next loop point and trigger each loop deck
     function scheduler() {
+      // Reset progress bars
+      if (playing == false) {
+        clearInterval(progressID);
+      }
+      // Calculate loop point
+      tmpDate = new Date();
+      tmpTime = tmpDate.getTime();
+      nextLoopPoint = tmpTime + loopLength;
+      // Trigger decks
       deck1.play();
       deck2.play();
       deck3.play();
+      // Update 'now playing' text
+      $("#np1").text(deck1.trackTitle());
+      $("#np2").text(deck2.trackTitle());
+      $("#np3").text(deck3.trackTitle());
+
+      // Reset deck progress bars
+      progress1 = false;
+      progress2 = false;
+      progress3 = false;
+      $("#bar1").css("width","0");
+      $("#bar2").css("width","0");
+      $("#bar3").css("width","0");
+    }
+
+    // Update live progress bars
+    function updateProgress() {
+      tmpDate = new Date();
+      tmpTime = tmpDate.getTime();
+      timeLeft = ((nextLoopPoint - tmpTime) * 100) / loopLength;
+      timeLeftString = timeLeft.toString();
+      timeLeftString = timeLeftString.concat("%");
+      if (progress1) {
+        $("#bar1").css("width",timeLeftString);
+      }
+      if (progress2) {
+        $("#bar2").css("width",timeLeftString);
+      }
+      if (progress3) {
+        $("#bar3").css("width",timeLeftString);
+      }
     }
 
     $("#np1").text("[choose a loop]");
@@ -110,23 +156,41 @@ $(document).ready(function() {
     $("#np3").text("[choose a loop]");
 
     // Add handlers for loop change cues
+    // and activate progress bar for that deck
+    // Deck 1
     $("#next1 > select").change(function() {
       let nextLoop = $(this).children("option:selected").attr("value");
       deck1.setTrack(nextLoop);
-      $("#np1").text(deck1.trackTitle());
+      $("#np1").text("[cueing next loop …]");
+      progress1 = true;
+      if (!playing) {
+        $("#bar1").css("width","100%");
+      }
     });
+    // Deck 2
     $("#next2 > select").change(function() {
       let nextLoop = $(this).children("option:selected").attr("value");
       deck2.setTrack(nextLoop);
-      $("#np2").text(deck2.trackTitle());
+      $("#np2").text("[cueing next loop …]");
+      progress2 = true;
+      if (!playing) {
+        $("#bar2").css("width","100%");
+      }
     });
+    // Deck 3
     $("#next3 > select").change(function() {
       let nextLoop = $(this).children("option:selected").attr("value");
       deck3.setTrack(nextLoop);
-      $("#np3").text(deck3.trackTitle());
+      $("#np3").text("[cueing next loop …]");
+      progress3 = true;
+      if (!playing) {
+        $("#bar3").css("width","100%");
+      }
     });
 
+    // Handle input to the PLAY/STOP button
     $( "#play" ).click(function() {
+      // If playing already, stop
       if (playing) {
         clearInterval(timerID);
         playing = false;
@@ -138,6 +202,7 @@ $(document).ready(function() {
         timerID = setInterval(scheduler, loopLength);
         playing = true;
         $("#play").text("STOP");
+        progressID = setInterval(updateProgress, 50);
       }
     });
 });
