@@ -1,5 +1,11 @@
 "use strict";
 
+// The name of the folder where the audio is stored
+var loopFolder = "loops";
+
+// The loop length in milliseconds
+var loopLength = 6000;
+
 var drums = [
   ['Easy drums','UC_Drums_80-01.wav'],
   ['Heavy drums','UC_Drums_80-02.wav'],
@@ -18,12 +24,25 @@ var tones = [
   ['E Organ','UC_PerpOrgan_80-E.wav'],
 ];
 
-// The name of the folder where the audio is stored
-var loopFolder = "loops";
+var storyFile = "whatitmeans.mp3"
+var storyLength = 200000;
 
-// The loop length in milliseconds
-var loopLength = 6000;
+// Story ////////////////////////////////////////////////////////////////////
+// Constructor prepares the audio
 
+function Story(storyFile) {
+  let nowPlaying;
+  let storyAudio = new Howl({
+    src: [loopFolder + '/' + storyFile]
+  });
+  this.storyAudio = storyAudio;
+};
+Story.prototype.play = function() {
+  this.nowPlaying = this.storyAudio.play();
+}
+Story.prototype.stop = function() {
+  this.storyAudio.stop();
+}
 
 // Deck /////////////////////////////////////////////////////////////////////
 // Constructor prepares the audio and the dropdown selector
@@ -82,7 +101,6 @@ Deck.prototype.setTrack = function(index) {
 Deck.prototype.play = function() {
   if (this.currentTrack !== null) {
     this.nowplaying = this.loopPack[this.currentTrack][2].play();
-    console.log(this.loopPack[this.currentTrack][2].duration());
   }
 }
 
@@ -96,6 +114,8 @@ $(document).ready(function() {
     let deck1 = new Deck(drums,"#next1");
     let deck2 = new Deck(bass,"#next2");
     let deck3 = new Deck(tones,"#next3");
+    let storyDeck = new Story(storyFile);
+    let storyEnd;
 
     let channel1, channel2, channel3, timerID, progressID;
     let playing = false;
@@ -135,6 +155,7 @@ $(document).ready(function() {
 
     // Update live progress bars
     function updateProgress() {
+      let storyTimeLeft, storyTimeLeftString;
       tmpDate = new Date();
       tmpTime = tmpDate.getTime();
       timeLeft = ((nextLoopPoint - tmpTime) * 100) / loopLength;
@@ -148,6 +169,12 @@ $(document).ready(function() {
       }
       if (progress3) {
         $("#bar3").css("width",timeLeftString);
+      }
+      if (playing) {
+        storyTimeLeft = ((storyEnd - tmpTime) * 100) / storyLength;
+        storyTimeLeftString = storyTimeLeft.toString();
+        storyTimeLeftString = storyTimeLeftString.concat("%");
+        $("#storybar").css("width",storyTimeLeftString);
       }
     }
 
@@ -194,15 +221,31 @@ $(document).ready(function() {
       if (playing) {
         clearInterval(timerID);
         playing = false;
+        if (deck1.trackTitle) { progress1 = true; }
+        if (deck2.trackTitle) { progress2 = true; }
+        if (deck3.trackTitle) { progress3 = true; }
+        $("#np1").text("[stopping]");
+        $("#np2").text("[stopping]");
+        $("#np3").text("[stopping]");
+
+        // CHANGEME only activate this once sound stops
+        // and change deck labels to silent
+        storyDeck.stop();
         $("#play").text("PLAY");
       } else {
         // Fire the scheduler event
         scheduler();
-        // and again at the end of each loop
+        // Calculate story end time
+        tmpDate = new Date();
+        tmpTime = tmpDate.getTime();
+        storyEnd = tmpTime + storyLength;
+        // Fire scheduler again at the end of each loop
         timerID = setInterval(scheduler, loopLength);
         playing = true;
         $("#play").text("STOP");
         progressID = setInterval(updateProgress, 50);
+        // Play the story
+        storyDeck.play();
       }
     });
 });
