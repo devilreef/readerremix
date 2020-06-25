@@ -36,6 +36,10 @@ var tones = [
 var storyFile = "storym.mp3"
 var storyLength = 368013;
 
+var drumVolume = 1.0;
+var bassVolume = 1.0;
+var toneVolume = 0.85;
+
 // Story ////////////////////////////////////////////////////////////////////
 // Constructor prepares the audio
 
@@ -56,11 +60,11 @@ Story.prototype.stop = function() {
 // Deck /////////////////////////////////////////////////////////////////////
 // Constructor prepares the audio and the dropdown selector
 
-function Deck(loopPack,selectorDiv) {
+function Deck(loopPack,selectorDiv,deckVolume) {
   // loopPack: array of all loops
-  // selectorDiv: id to place loop selector
+  // selectorDiv: HTML id to place loop selector
   let audio;
-  let nowplaying;
+  let nowplaying; // Howler ID of current loop
 
   // Prepare root of loop selector
   let loopHTML = $('<select />');
@@ -81,13 +85,16 @@ function Deck(loopPack,selectorDiv) {
     // Each loop will be a subarray: (title, filename, audio Howl object)
     // Load in the audio and add it to the array
     audio = new Howl({
-        src: [loopFolder + '/' + loop[1]]
+        src: [loopFolder + '/' + loop[1]],
+        volume: deckVolume,
     });
     loop.push(audio);
   });
 
   // Store the fully loaded loop pack in the deck object
   this.loopPack = loopPack;
+  // Remember mixer volume for this deck
+  this.deckVolume = deckVolume;
   // Write the HTML for the selector
   $(selectorDiv).html(loopHTML);
   // Each track starts with nothing cued up
@@ -102,10 +109,26 @@ Deck.prototype.trackTitle = function() {
   }
 };
 Deck.prototype.setTrack = function(index) {
+  // Keep track of what's currently playing
   if (index == "silent") {
     this.currentTrack = null;
   } else {
     this.currentTrack = index;
+  }
+};
+Deck.prototype.mute = function() {
+  // Set deck volume to zero
+  this.loopPack[this.currentTrack][2].volume(0);
+};
+Deck.prototype.unmute = function() {
+  // Set deck volume to desired mix level
+  this.loopPack[this.currentTrack][2].volume(this.deckVolume);
+};
+Deck.prototype.fadeOut = function() {
+  console.log("Fading...");
+  if (this.currentTrack !== null) {
+    // Super awkward CHANGEME
+    this.loopPack[this.currentTrack][2].fade(this.loopPack[this.currentTrack][2].volume(),0,loopLength,this.nowplaying);
   }
 };
 Deck.prototype.play = function() {
@@ -120,9 +143,9 @@ Deck.prototype.play = function() {
 $(document).ready(function() {
 
     // Load audio into decks and build loop selector HTML
-    let deck1 = new Deck(drums,"#next1");
-    let deck2 = new Deck(bass,"#next2");
-    let deck3 = new Deck(tones,"#next3");
+    let deck1 = new Deck(drums,"#next1",drumVolume);
+    let deck2 = new Deck(bass,"#next2",bassVolume);
+    let deck3 = new Deck(tones,"#next3",toneVolume);
     let storyDeck = new Story(storyFile);
     let storyEnd;
 
@@ -198,7 +221,7 @@ $(document).ready(function() {
     $("#next1 > select").change(function() {
       let nextLoop = $(this).children("option:selected").attr("value");
       deck1.setTrack(nextLoop);
-      $("#np1").text("[cueing next loop …]");
+      $("#np1").text("[cueing loop …]");
       progress1 = true;
       if (!playing) {
         $("#bar1").css("width","100%");
@@ -208,7 +231,7 @@ $(document).ready(function() {
     $("#next2 > select").change(function() {
       let nextLoop = $(this).children("option:selected").attr("value");
       deck2.setTrack(nextLoop);
-      $("#np2").text("[cueing next loop …]");
+      $("#np2").text("[cueing loop …]");
       progress2 = true;
       if (!playing) {
         $("#bar2").css("width","100%");
@@ -218,7 +241,7 @@ $(document).ready(function() {
     $("#next3 > select").change(function() {
       let nextLoop = $(this).children("option:selected").attr("value");
       deck3.setTrack(nextLoop);
-      $("#np3").text("[cueing next loop …]");
+      $("#np3").text("[cueing loop …]");
       progress3 = true;
       if (!playing) {
         $("#bar3").css("width","100%");
@@ -226,7 +249,7 @@ $(document).ready(function() {
     });
 
     // Handle input to the PLAY/STOP button
-    $( "#play" ).click(function() {
+    $("#play").click(function() {
       // If playing already, stop
       if (playing) {
         clearInterval(timerID);
@@ -241,6 +264,9 @@ $(document).ready(function() {
         // CHANGEME only activate this once sound stops
         // and change deck labels to silent
         storyDeck.stop();
+        deck1.fadeOut();
+        deck2.fadeOut();
+        deck3.fadeOut();
         $("#play").text("PLAY");
       } else {
         // Fire the scheduler event
