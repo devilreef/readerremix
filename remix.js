@@ -1,31 +1,40 @@
 "use strict";
 
 // The name of the folder where the audio is stored
-var loopFolder = "loops";
+var loopFolder = "audio";
 
 // The loop length in milliseconds
-var loopLength = 6000;
+var loopLength = 3997;
 
 var drums = [
-  ['Easy drums','UC_Drums_80-01.wav'],
-  ['Heavy drums','UC_Drums_80-02.wav'],
-  ['Beast mode','UC_Drums_80-03.wav'],
+  ['4OnTheFloor','4onfloor.mp3'],
+  ['4Straight','4straight.mp3'],
+  ['4Filler','4filler.mp3'],
+  ['4Square','4square.mp3'],
+  ['2Timed','2timed.mp3'],
+  ['2Cubed','2cubed.mp3'],
 ];
 
 var bass = [
-  ['A Bass','UC_BassGuit_80-A.mp3'],
-  ['C Bass','UC_BassGuit_80-C.mp3'],
-  ['E Bass','UC_BassGuit_80-E.mp3'],
+  ['Punchy','punchy.mp3'],
+  ['Pulsey','pulsey.mp3'],
+  ['StraightUp','straightup.mp3'],
+  ['StraightOff','straightoff.mp3'],
+  ['WeRise','werise.mp3'],
+  ['Perky','perky.mp3'],
 ];
 
 var tones = [
-  ['A Organ','UC_PerpOrgan_80-A.wav'],
-  ['C Organ','UC_PerpOrgan_80-C.wav'],
-  ['E Organ','UC_PerpOrgan_80-E.wav'],
+  ['Safe','safe.mp3'],
+  ['Unsafe','unsafe.mp3'],
+  ['NightWalk','nightwalk.mp3'],
+  ['DayBreak','daybreak.mp3'],
+  ['AngelRain','angelrain.mp3'],
+  ['AngelTrain','angeltrain.mp3'],
 ];
 
-var storyFile = "whatitmeans.mp3"
-var storyLength = 200000;
+var storyFile = "storym.mp3"
+var storyLength = 368013;
 
 // Story ////////////////////////////////////////////////////////////////////
 // Constructor prepares the audio
@@ -76,6 +85,7 @@ function Deck(loopPack,selectorDiv) {
     });
     loop.push(audio);
   });
+
   // Store the fully loaded loop pack in the deck object
   this.loopPack = loopPack;
   // Write the HTML for the selector
@@ -108,7 +118,6 @@ Deck.prototype.play = function() {
 // Main /////////////////////////////////////////////////////////////////////
 
 $(document).ready(function() {
-    console.log("ready!");
 
     // Load audio into decks and build loop selector HTML
     let deck1 = new Deck(drums,"#next1");
@@ -139,6 +148,7 @@ $(document).ready(function() {
       deck1.play();
       deck2.play();
       deck3.play();
+
       // Update 'now playing' text
       $("#np1").text(deck1.trackTitle());
       $("#np2").text(deck2.trackTitle());
