@@ -65,6 +65,7 @@ function Deck(loopPack,selectorDiv,deckVolume) {
   // selectorDiv: HTML id to place loop selector
   let audio;
   let nowplaying; // Howler ID of current loop
+  let muted; // True if Mute toggle engaged
 
   // Prepare root of loop selector
   let loopHTML = $('<select />');
@@ -93,6 +94,8 @@ function Deck(loopPack,selectorDiv,deckVolume) {
 
   // Store the fully loaded loop pack in the deck object
   this.loopPack = loopPack;
+  // Deck is not muted by default
+  this.muted = false;
   // Remember mixer volume for this deck
   this.deckVolume = deckVolume;
   // Write the HTML for the selector
@@ -118,11 +121,19 @@ Deck.prototype.setTrack = function(index) {
 };
 Deck.prototype.mute = function() {
   // Set deck volume to zero
-  this.loopPack[this.currentTrack][2].volume(0);
+  console.log(this.muted);
+  if (this.currentTrack !== null) {
+    this.loopPack[this.currentTrack][2].volume(0);
+  }
+  this.muted = true;
+  console.log(this.muted);
 };
-Deck.prototype.unmute = function() {
-  // Set deck volume to desired mix level
-  this.loopPack[this.currentTrack][2].volume(this.deckVolume);
+Deck.prototype.unMute = function() {
+  // Set deck volume to preset mix level
+  if (this.currentTrack !== null) {
+    this.loopPack[this.currentTrack][2].volume(this.deckVolume);
+  }
+  this.muted = false;
 };
 Deck.prototype.fadeOut = function() {
   console.log("Fading...");
@@ -134,6 +145,9 @@ Deck.prototype.fadeOut = function() {
 Deck.prototype.play = function() {
   if (this.currentTrack !== null) {
     this.nowplaying = this.loopPack[this.currentTrack][2].play();
+    if (this.muted) {
+      this.loopPack[this.currentTrack][2].volume(0);
+    }
   }
 }
 
@@ -247,6 +261,33 @@ $(document).ready(function() {
         $("#bar3").css("width","100%");
       }
     });
+
+    // Handle input to the Mute toggle
+    $("#mute1").click(function() {
+      $("#mute1").toggleClass("muted");
+      if ($("#mute1").hasClass("muted")) {
+        deck1.mute();
+      } else {
+        deck1.unMute();
+      }
+    });
+    $("#mute2").click(function() {
+      $("#mute2").toggleClass("muted");
+      if ($("#mute2").hasClass("muted")) {
+        deck2.mute();
+      } else {
+        deck2.unMute();
+      }
+    });
+    $("#mute3").click(function() {
+      $("#mute3").toggleClass("muted");
+      if ($("#mute3").hasClass("muted")) {
+        deck3.mute();
+      } else {
+        deck3.unMute();
+      }
+    });
+
 
     // Handle input to the PLAY/STOP button
     $("#play").click(function() {

@@ -132,6 +132,10 @@ body {
   border: 1px solid green;
 }
 
+.muted {
+  color: white;
+}
+
 
 /* Text */
 /* If the screen size is 601px or more, set the font-size of <div> to 80px */
