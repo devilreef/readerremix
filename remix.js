@@ -45,8 +45,10 @@ var toneVolume = 0.85;
 
 function Story(storyFile) {
   let nowPlaying;
+  // Force HTML Audio for longer file
   let storyAudio = new Howl({
-    src: [loopFolder + '/' + storyFile]
+    src: [loopFolder + '/' + storyFile],
+    html5: true
   });
   this.storyAudio = storyAudio;
 };
