@@ -288,7 +288,6 @@ $(document).ready(function() {
       }
     });
 
-
     // Handle input to the PLAY/STOP button
     $("#play").click(function() {
       // If playing already, stop
@@ -325,4 +324,16 @@ $(document).ready(function() {
         storyDeck.play();
       }
     });
+
+    // Remove the tutorial panel on LAUNCH click
+    $("#launch").click(function() {
+      if ($("#launch").hasClass("ready")) {
+        $("#overlay").css("display","none");
+      }
+    });
+
+    // OK, everything is loaded, we can go live
+    $("#launch").removeClass("unready");
+    $("#launch").addClass("ready");
+    $("#launch").text("Launch");
 });
