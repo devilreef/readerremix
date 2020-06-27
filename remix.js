@@ -48,7 +48,7 @@ function Story(storyFile) {
   let storyAudio = new Howl({
     src: [loopFolder + '/' + storyFile],
     // Force HTML Audio for longer file
-    // html5: true,
+    html5: true,
   });
 //    html5: true,
   this.storyAudio = storyAudio;
