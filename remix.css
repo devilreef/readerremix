@@ -96,7 +96,7 @@ body {
   width: 30%;
   height: 100%;
   background-color: #ffffff;
-  border: 4px solid black;
+  border: 2px solid black;
   font-family: 'Saira Condensed', sans-serif;
   font-weight: 400;
   padding: 5%;
@@ -109,7 +109,7 @@ body {
   align-items: center;
   width: 30%;
   height: 100%;
-  border: 4px solid black;
+  border: 2px solid black;
   margin: auto;
   font-family: 'Saira Condensed', sans-serif;
   font-weight: 400;
@@ -121,35 +121,50 @@ body {
 
 .decklabel {
   font-family: 'Saira Condensed', sans-serif;
-  font-weight: 700;
+  font-weight: 700;  top: 0;
+  left: 0;
+
   text-align: center;
 }
 
+/* Track controls */
+
 .nowplaying {
-  width: 80%;
-  border: 1px dotted green;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  margin: 0 0 0 auto;
+  color: #f1d302;
+  border: 1px solid #333333;
 }
 
 .progress {
+  position: relative;
   background-color: #333333;
   width: 80%;
-  border: 1px dotted yellow;
 }
 
 .bar {
-  background-color: #66ff66;
-  align-self: right;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  background-color: #f1d302;
   width: 0%;
+  height: 100%;
   margin: 0 0 0 auto;
 
 }
 
 .next {
   width: 80%;
-  border: 1px dotted yellow;
+  clear: both;
 }
 
 .next select {
+  width: 100%;
+  background-color: #f1d302;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
@@ -161,6 +176,7 @@ body {
 }
 
 .mute,.solo {
+  margin: 5% auto 5% auto;
   border: 1px solid green;
 }
 
