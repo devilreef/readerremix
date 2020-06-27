@@ -45,12 +45,20 @@ var toneVolume = 0.85;
 
 function Story(storyFile) {
   let nowPlaying;
-  // Force HTML Audio for longer file
   let storyAudio = new Howl({
     src: [loopFolder + '/' + storyFile],
-    html5: true
+    // Force HTML Audio for longer file
+    // html5: true,
   });
+//    html5: true,
   this.storyAudio = storyAudio;
+  this.storyAudio.once('load', function() {
+    // OK, everything is loaded, we can go live
+    console.log("LOADED");
+    $("#launch").removeClass("unready");
+    $("#launch").addClass("ready");
+    $("#launch").text("Launch");
+  });
 };
 Story.prototype.play = function() {
   this.nowPlaying = this.storyAudio.play();
@@ -333,9 +341,4 @@ $(document).ready(function() {
         $("#overlay").css("display","none");
       }
     });
-
-    // OK, everything is loaded, we can go live
-    $("#launch").removeClass("unready");
-    $("#launch").addClass("ready");
-    $("#launch").text("Launch");
 });
