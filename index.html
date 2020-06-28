@@ -16,7 +16,7 @@
     <div id="loader">
       <p>Welcome to the <b>Reader Remix</b>. This is a story with background music. <b>You are the DJ</b> for the background music. Don&rsquo;t worry, you will smash it.</p>
       <p>You have three decks, for DRUMS, BASS and TONES. Each comes loaded with loops of music. To begin, select a loop for at least one deck, then press PLAY to start the story. You can change loops any time. If you like, try to match your soundtrack to the action in the story.</p>
-      <p><b>Pro tip:</b> Sometimes less is more. Three loops at once can be overpowering, particularly the TONES. Try setting one deck to silent or using the Mute buttons to explore different sounds.</p>
+      <p><b>Pro tip:</b> Sometimes less is more. Three loops at once can be overpowering, particularly the TONES. Try setting decks to silent or using the Mute buttons to explore different sounds.</p>
       <div id="launch" class="unready">Loading&hellip;</div>
     </div>
   </div>
@@ -27,17 +27,19 @@
         <div class="nowplaying">&nbsp;</div>
         <div id="storybar" class="bar">&nbsp;</div>
       </div>
-      <div id="play" class="notready">PLAY</div>
+      <div id="play" class="ready">PLAY</div>
     </div>
   </div>
   <div id="decks">
     <div id="deck1" class="deck">
       <div class="decklabel">DRUMS</div>
-      <div id="progress1" class="progress">
-        <div id="np1" class="nowplaying">Now Playing</div>
-        <div id="bar1" class="bar">&nbsp;</div>
+      <div class="loopselect">
+        <div id="progress1" class="progress">
+          <div id="np1" class="nowplaying">Now Playing</div>
+          <div id="bar1" class="bar">&nbsp;</div>
+        </div>
+        <div id="next1" class="next">Next</div>
       </div>
-      <div id="next1" class="next">Next</div>
       <div class="mutesolo">
         <div id="mute1" class="mute">Mute</div>
         <!-- <div id="solo1" class="solo">Solo</div> -->
@@ -45,11 +47,13 @@
     </div>
     <div id="deck2" class="deck">
       <div class="decklabel">BASS</div>
-      <div id="progress2" class="progress">
-        <div id="np2" class="nowplaying">Now Playing</div>
-        <div id="bar2" class="bar">&nbsp;</div>
+      <div class="loopselect">
+        <div id="progress2" class="progress">
+          <div id="np2" class="nowplaying">Now Playing</div>
+          <div id="bar2" class="bar">&nbsp;</div>
+        </div>
+        <div id="next2" class="next">Next</div>
       </div>
-      <div id="next2" class="next">Next</div>
       <div class="mutesolo">
         <div id="mute2" class="mute">Mute</div>
         <!-- <div id="solo2" class="solo">Solo</div> -->
@@ -57,11 +61,13 @@
     </div>
     <div id="deck3" class="deck">
       <div class="decklabel">TONES</div>
-      <div id="progress3" class="progress">
-        <div id="np3" class="nowplaying">Now Playing</div>
-        <div id="bar3" class="bar">&nbsp;</div>
+      <div class="loopselect">
+        <div id="progress3" class="progress">
+          <div id="np3" class="nowplaying">Now Playing</div>
+          <div id="bar3" class="bar">&nbsp;</div>
+        </div>
+        <div id="next3" class="next">Next</div>
       </div>
-      <div id="next3" class="next">Next</div>
       <div class="mutesolo">
         <div id="mute3" class="mute">Mute</div>
         <!-- <div id="solo3" class="solo">Solo</div> -->
