@@ -106,6 +106,7 @@ body {
 .deck {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 30%;
   height: 100%;
@@ -115,16 +116,21 @@ body {
   font-weight: 400;
 }
 
-#deck1 { background-color: #dd5151; }
-#deck2 { background-color: #369386; }
-#deck3 { background-color: #eb942b; }
+#deck1 { background-color: #00755e; }
+#deck2 { background-color: #00a33a; }
+#deck3 { background-color: #abc700; }
+
+/* #deck1 { background-color: #008d82; }
+#deck2 { background-color: #17ad6d; }
+#deck3 { background-color: #88c641; } */
 
 .decklabel {
   font-family: 'Saira Condensed', sans-serif;
   font-weight: 700;  top: 0;
   left: 0;
-
   text-align: center;
+  border: 1px dotted red;
+
 }
 
 /* Track controls */
@@ -134,7 +140,6 @@ body {
   top: 0;
   left: 0;
   z-index: 2;
-  margin: 0 0 0 auto;
   color: #f1d302;
   border: 1px solid #333333;
 }
@@ -173,6 +178,7 @@ body {
 .mutesolo {
   width: 80%;
   display: flex;
+  border: 1px dotted red;
 }
 
 .mute,.solo {
