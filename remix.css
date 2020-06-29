@@ -46,12 +46,6 @@ body {
 
 /* Decks */
 
-#decks::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
 #story {
   display: flex;
   flex-direction: column;
@@ -69,6 +63,12 @@ body {
   padding: 2%;
 }
 
+#decks::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 #footer {
   width: 100%;
   height: 10%;
@@ -76,6 +76,7 @@ body {
   font-family: 'Saira Condensed', sans-serif;
   font-weight: 400;
 }
+
 
 #storydeck {
   display: flex;
@@ -130,7 +131,7 @@ body {
 /* Track controls */
 
 select {
-  border: 1px solid #666666;
+  border: 1px solid #333333;
 }
 
 .progress {
@@ -145,7 +146,7 @@ select {
   left: 0;
   z-index: 2;
   color: #f1d302;
-  border: 1px solid #666666;
+  border: 1px solid #333333;
 }
 
 
@@ -178,8 +179,8 @@ select {
 /* Controls */
 
 #play {
-  width: 80%;
-  box-shadow: 1px 1px;
+  padding: 0 4% 0 4%;
+  box-shadow: 1px 1px #999999;
 }
 
 .unready {
@@ -198,12 +199,13 @@ select {
 }
 
 .mute,.solo {
+  padding: 0 4% 0 4%;
   margin: 5% auto 5% auto;
-  border: 1px solid green;
+  border: 1px solid black;
 }
 
 .muted {
-  color: white;
+  color: #f1d302;
 }
 
 
