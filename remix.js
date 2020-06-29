@@ -33,8 +33,19 @@ var tones = [
   ['AngelTrain','angeltrain.mp3'],
 ];
 
+// Male voice configuration
+
 var storyFile = "storym.mp3"
 var storyLength = 368013;
+var hugeWords = [
+  ['GOOD ENOUGH EXCUSE',13000],
+  ['UH-OH',30500],
+  ['FILE CORRUPT',179250],
+  ['WEIRD CLOTHES',196750],
+  ['SORT OF SMELLS',213250],
+  ['GO HOME',236750],
+  ['SMASHED IT',364500]
+];
 
 var drumVolume = 1.0;
 var bassVolume = 1.0;
@@ -235,6 +246,20 @@ $(document).ready(function() {
       }
     }
 
+    function showHugeText(hugeText) {
+      console.log("HUGE TEXT TIME");
+      console.log(hugeText);
+      $("#hugewords").css("transition-property","opacity");
+      $("#hugewords").css("transition-delay","0s");
+      $("#hugewords").css("transition-duration","0s");
+      $("#hugewords").css("opacity","1.0");
+      $("#hugewords").text(hugeText);
+//      $("#hugewords").css("transition-property","opacity");
+      $("#hugewords").css("transition-delay","2s");
+      $("#hugewords").css("transition-duration","4s");
+      $("#hugewords").css("opacity","0");
+    }
+
     $("#np1").text("[choose a loop]");
     $("#np2").text("[choose a loop]");
     $("#np3").text("[choose a loop]");
@@ -329,9 +354,25 @@ $(document).ready(function() {
         timerID = setInterval(scheduler, loopLength);
         playing = true;
         $("#play").text("STOP");
+        // Schedule progress bar updates
         progressID = setInterval(updateProgress, 50);
         // Play the story
         storyDeck.play();
+        hugeWords.forEach(function(hugeRow) {
+// CHANGEME this needs stored timers so it can be cancelled on STOP
+          let hugeText = hugeRow[0];
+          let timing = hugeRow[1];
+          // Schedule showing the text
+          setTimeout(showHugeText,timing,hugeText);
+          // Reset opacity after fade complete
+          setTimeout(function(){
+            $("#hugewords").text("");
+            $("#hugewords").css("transition-property","opacity");
+            $("#hugewords").css("transition-delay","0s");
+            $("#hugewords").css("transition-duration","0s");
+            $("#hugewords").css("opacity","1.0");
+          },(timing + 6000));
+        })
       }
     });
 
