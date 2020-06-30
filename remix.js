@@ -178,6 +178,8 @@ $(document).ready(function() {
     let progress2 = false;
     let progress3 = false;
     let tmpDate, tmpTime, nextLoopPoint, timeLeft, timeLeftString;
+    // To schedule the pop-up huge letters
+    let hugeTextEvents = [];
 
     // Calculate next loop point and trigger each loop deck
     function scheduler() {
@@ -233,6 +235,7 @@ $(document).ready(function() {
       }
     }
 
+    // Handle timed text popups
     function showHugeText(hugeText) {
       $("#hugewords").css("transition-property","opacity");
       $("#hugewords").css("transition-delay","0s");
@@ -310,7 +313,7 @@ $(document).ready(function() {
 
     // Handle input to the PLAY/STOP button
     $("#play").click(function() {
-      // If playing already, stop
+      // If playing already, STOP
       if (playing) {
         clearInterval(timerID);
         playing = false;
@@ -328,7 +331,12 @@ $(document).ready(function() {
         deck2.fadeOut();
         deck3.fadeOut();
         $("#play").text("PLAY");
+        // Clean up scheduled huge text events
+        hugeTextEvents.forEach(function(tmpEvent) {
+          clearTimeout(tmpEvent);
+        })
       } else {
+        // If not playing, START
         // Fire the scheduler event
         scheduler();
         // Calculate story end time
@@ -343,20 +351,22 @@ $(document).ready(function() {
         progressID = setInterval(updateProgress, 50);
         // Play the story
         storyDeck.play();
+        // Set timed triggers for huge text appearance
+        let hugeTextIndex = 0;
         hugeWords.forEach(function(hugeRow) {
-// CHANGEME this needs stored timers so it can be cancelled on STOP
           let hugeText = hugeRow[0];
           let timing = hugeRow[1];
           // Schedule showing the text
-          setTimeout(showHugeText,timing,hugeText);
-          // Reset opacity after fade complete
-          setTimeout(function(){
+          hugeTextEvents.push(setTimeout(showHugeText,timing,hugeText));
+          // Schedule opacity reset after fade complete
+          hugeTextEvents.push(setTimeout(function(){
             $("#hugewords").text("");
             $("#hugewords").css("transition-property","opacity");
             $("#hugewords").css("transition-delay","0s");
             $("#hugewords").css("transition-duration","0s");
             $("#hugewords").css("opacity","1.0");
-          },(timing + 6000));
+          // Six seconds is long enough to clear the previous event
+          },(timing + 6100)));
         })
       }
     });
