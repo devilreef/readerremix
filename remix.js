@@ -51,12 +51,17 @@ function Story(storyFile) {
   this.storyAudio = storyAudio;
   this.storyAudio.once('load', function() {
     // OK, everything is loaded, we can go live
-    console.log("LOADED");
-    console.log(storyAudio.duration());
+//    console.log("LOADED");
+//    console.log(storyAudio.duration());
     $("#launch").removeClass("unready");
     $("#launch").addClass("ready");
     $("#launch").text("Launch");
   });
+};
+Story.prototype.fadeOut = function() {
+  if (this.storyAudio !== null) {
+    this.storyAudio.fade(this.storyAudio.volume(),0,loopLength,this.nowPlaying);
+  }
 };
 Story.prototype.play = function() {
   this.nowPlaying = this.storyAudio.play();
@@ -129,12 +134,10 @@ Deck.prototype.setTrack = function(index) {
 };
 Deck.prototype.mute = function() {
   // Set deck volume to zero
-  console.log(this.muted);
   if (this.currentTrack !== null) {
     this.loopPack[this.currentTrack][2].volume(0);
   }
   this.muted = true;
-  console.log(this.muted);
 };
 Deck.prototype.unMute = function() {
   // Set deck volume to preset mix level
@@ -144,7 +147,6 @@ Deck.prototype.unMute = function() {
   this.muted = false;
 };
 Deck.prototype.fadeOut = function() {
-  console.log("Fading...");
   if (this.currentTrack !== null) {
     // Super awkward CHANGEME
     this.loopPack[this.currentTrack][2].fade(this.loopPack[this.currentTrack][2].volume(),0,loopLength,this.nowplaying);
@@ -313,6 +315,7 @@ $(document).ready(function() {
 
     // Handle input to the PLAY/STOP button
     $("#play").click(function() {
+
       // If playing already, STOP
       if (playing) {
         clearInterval(timerID);
@@ -326,7 +329,7 @@ $(document).ready(function() {
 
         // CHANGEME only activate this once sound stops
         // and change deck labels to silent
-        storyDeck.stop();
+        storyDeck.fadeOut();
         deck1.fadeOut();
         deck2.fadeOut();
         deck3.fadeOut();
@@ -335,6 +338,7 @@ $(document).ready(function() {
         hugeTextEvents.forEach(function(tmpEvent) {
           clearTimeout(tmpEvent);
         })
+
       } else {
         // If not playing, START
         // Fire the scheduler event
