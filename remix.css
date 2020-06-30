@@ -44,6 +44,17 @@ body {
   z-index: 99;
 }
 
+#launchcontainer {
+  display: flex;
+  flex-direction: column;
+}
+
+#launch {
+  margin: 0 auto 0 auto;
+  padding: 0 2% 0 2%;
+  box-shadow: 1px 1px black;
+}
+
 /* Decks */
 
 #story {
@@ -59,7 +70,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 20%;
+/*  height: 20%; */
+  height: 24%;
   padding: 2%;
   text-align: center;
   font-family: 'Saira Condensed', sans-serif;
@@ -70,7 +82,8 @@ body {
   width: 100%;
   display: flex;
   flex-direction: row;
-  height: 40%;
+/*  height: 40%; */
+  height: 35%;
   padding: 2%;
 }
 
@@ -95,6 +108,7 @@ body {
   justify-content: space-around;
   align-items: center;
   width: 30%;
+/*  width: 97%; */
   height: 100%;
   background-color: #ffffff;
   border: 2px solid black;
@@ -105,6 +119,7 @@ body {
 
 #storyprogress {
   width: 80%;
+/*  width: 94%; */
 }
 
 .deck {
@@ -159,9 +174,9 @@ select {
   left: 0;
   z-index: 2;
   color: #f1d302;
+  padding: 0 4% 0 4%;
   border: 1px solid #333333;
 }
-
 
 .bar {
   position: absolute;
@@ -172,7 +187,6 @@ select {
   width: 0%;
   height: 100%;
   margin: 0 0 0 auto;
-
 }
 
 .next {
@@ -184,6 +198,7 @@ select {
 .next select {
   width: 100%;
   background-color: #f1d302;
+  padding: 0 2% 0 2%;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
@@ -193,7 +208,7 @@ select {
 
 #play {
   padding: 0 4% 0 4%;
-  box-shadow: 1px 1px #999999;
+  box-shadow: 1px 1px black;
 }
 
 .unready {
@@ -215,6 +230,7 @@ select {
   padding: 0 4% 0 4%;
   margin: 5% auto 5% auto;
   border: 1px solid black;
+  box-shadow: 1px 1px black;
 }
 
 .muted {
@@ -238,7 +254,8 @@ a {
     font-size: 52px;
   }
    .next,.nowplaying {
-    font-size: 24px;
+/*    font-size: 24px; */
+    font-size: 20px;
   }
   .mutesolo {
     flex-direction: row;

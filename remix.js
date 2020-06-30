@@ -33,20 +33,6 @@ var tones = [
   ['AngelTrain','angeltrain.mp3'],
 ];
 
-// Male voice configuration
-
-var storyFile = "storym.mp3"
-var storyLength = 368013;
-var hugeWords = [
-  ['GOOD ENOUGH EXCUSE',13000],
-  ['UH-OH',30500],
-  ['FILE CORRUPT',179250],
-  ['WEIRD CLOTHES',196750],
-  ['SORT OF SMELLS',213250],
-  ['GO HOME',236750],
-  ['SMASHED IT',364500]
-];
-
 var drumVolume = 1.0;
 var bassVolume = 1.0;
 var toneVolume = 0.85;
@@ -66,6 +52,7 @@ function Story(storyFile) {
   this.storyAudio.once('load', function() {
     // OK, everything is loaded, we can go live
     console.log("LOADED");
+    console.log(storyAudio.duration());
     $("#launch").removeClass("unready");
     $("#launch").addClass("ready");
     $("#launch").text("Launch");
@@ -247,8 +234,6 @@ $(document).ready(function() {
     }
 
     function showHugeText(hugeText) {
-      console.log("HUGE TEXT TIME");
-      console.log(hugeText);
       $("#hugewords").css("transition-property","opacity");
       $("#hugewords").css("transition-delay","0s");
       $("#hugewords").css("transition-duration","0s");
@@ -260,9 +245,9 @@ $(document).ready(function() {
       $("#hugewords").css("opacity","0");
     }
 
-    $("#np1").text("[choose a loop]");
-    $("#np2").text("[choose a loop]");
-    $("#np3").text("[choose a loop]");
+    $("#np1").text("[choose loop below]");
+    $("#np2").text("[choose loop below]");
+    $("#np3").text("[choose loop below]");
 
     // Add handlers for loop change cues
     // and activate progress bar for that deck
@@ -270,7 +255,7 @@ $(document).ready(function() {
     $("#next1 > select").change(function() {
       let nextLoop = $(this).children("option:selected").attr("value");
       deck1.setTrack(nextLoop);
-      $("#np1").text("[cueing loop …]");
+      $("#np1").text("[cueing loop…]");
       progress1 = true;
       if (!playing) {
         $("#bar1").css("width","100%");
