@@ -182,6 +182,7 @@ $(document).ready(function() {
     let tmpDate, tmpTime, nextLoopPoint, timeLeft, timeLeftString;
     // To schedule the pop-up huge letters
     let hugeTextEvents = [];
+    let txtEvents = [];
 
     // Calculate next loop point and trigger each loop deck
     function scheduler() {
@@ -237,17 +238,23 @@ $(document).ready(function() {
       }
     }
 
-    // Handle timed text popups
+    // Handle timed obstacle text popups
     function showHugeText(hugeText) {
+      $("#hugewords").addClass("obstacle");
       $("#hugewords").css("transition-property","opacity");
       $("#hugewords").css("transition-delay","0s");
       $("#hugewords").css("transition-duration","0s");
       $("#hugewords").css("opacity","1.0");
-      $("#hugewords").text(hugeText);
-//      $("#hugewords").css("transition-property","opacity");
+      $("#hugewords").html(hugeText);
       $("#hugewords").css("transition-delay","2s");
       $("#hugewords").css("transition-duration","4s");
       $("#hugewords").css("opacity","0");
+    }
+
+    // Handle timed text message popups
+    function showTxt(txt) {
+      $("#hugewords").addClass("txt");
+      $("#hugewords").html(txt);
     }
 
     $("#np1").text("[choose loop below]");
@@ -337,6 +344,9 @@ $(document).ready(function() {
         // Clean up scheduled huge text events
         hugeTextEvents.forEach(function(tmpEvent) {
           clearTimeout(tmpEvent);
+        });
+        txtEvents.forEach(function(tmpEvent) {
+          clearTimeout(tmpEvent);
         })
 
       } else {
@@ -356,7 +366,6 @@ $(document).ready(function() {
         // Play the story
         storyDeck.play();
         // Set timed triggers for huge text appearance
-        let hugeTextIndex = 0;
         hugeWords.forEach(function(hugeRow) {
           let hugeText = hugeRow[0];
           let timing = hugeRow[1];
@@ -369,8 +378,18 @@ $(document).ready(function() {
             $("#hugewords").css("transition-delay","0s");
             $("#hugewords").css("transition-duration","0s");
             $("#hugewords").css("opacity","1.0");
+            $("#hugewords").removeClass("obstacle");
           // Six seconds is long enough to clear the previous event
           },(timing + 6100)));
+        })
+        textMsgs.forEach(function(txtRow) {
+          let txt = txtRow[0];
+          let timing = txtRow[1];
+          txtEvents.push(setTimeout(showTxt,timing,txt));
+          txtEvents.push(setTimeout(function() {
+            $("#hugewords").text("");
+            $("#hugewords").removeClass("txt");
+          },(timing + 3000)));
         })
       }
     });
