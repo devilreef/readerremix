@@ -237,7 +237,10 @@ select {
 
 
 /* Text */
-/* Adjust font size based on screen width */
+
+#hugewords {
+  transition-property: opacity;
+}
 
 b {
   font-weight: 700;
@@ -246,6 +249,8 @@ b {
 a {
   color: black;
 }
+
+/* Adjust font size based on screen width */
 
 @media only screen and (min-width: 601px) {
   .decklabel {

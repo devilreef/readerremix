@@ -11,7 +11,7 @@ var hugeWords = [
   ['SORT OF SMELLS',233250],
   ['GO HOME',260500],
 // CHANGEME maybe a second or two later, after story stops
-  ['NICE',395500]
+  ['SMASHED IT',395500]
 ];
 var textMsgs = [
   ["ru coming? internet is down<br/>and theres no music",26000],

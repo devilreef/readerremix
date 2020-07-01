@@ -241,7 +241,7 @@ $(document).ready(function() {
     // Handle timed obstacle text popups
     function showHugeText(hugeText) {
       $("#hugewords").addClass("obstacle");
-      $("#hugewords").css("transition-property","opacity");
+//      $("#hugewords").css("transition-property","opacity");
       $("#hugewords").css("transition-delay","0s");
       $("#hugewords").css("transition-duration","0s");
       $("#hugewords").css("opacity","1.0");
@@ -250,11 +250,23 @@ $(document).ready(function() {
       $("#hugewords").css("transition-duration","4s");
       $("#hugewords").css("opacity","0");
     }
+    function hideHugeText() {
+      $("#hugewords").html("");
+//      $("#hugewords").css("transition-property","opacity");
+      $("#hugewords").css("transition-delay","0s");
+      $("#hugewords").css("transition-duration","0s");
+      $("#hugewords").css("opacity","1.0");
+      $("#hugewords").removeClass("obstacle");
+    }
 
     // Handle timed text message popups
     function showTxt(txt) {
       $("#hugewords").addClass("txt");
       $("#hugewords").html(txt);
+    }
+    function hideTxt() {
+      $("#hugewords").html("");
+      $("#hugewords").removeClass("txt");
     }
 
     $("#np1").text("[choose loop below]");
@@ -371,26 +383,18 @@ $(document).ready(function() {
           let timing = hugeRow[1];
           // Schedule showing the text
           hugeTextEvents.push(setTimeout(showHugeText,timing,hugeText));
-          // Schedule opacity reset after fade complete
-          hugeTextEvents.push(setTimeout(function(){
-            $("#hugewords").text("");
-            $("#hugewords").css("transition-property","opacity");
-            $("#hugewords").css("transition-delay","0s");
-            $("#hugewords").css("transition-duration","0s");
-            $("#hugewords").css("opacity","1.0");
-            $("#hugewords").removeClass("obstacle");
-          // Six seconds is long enough to clear the previous event
-          },(timing + 6100)));
-        })
+          // Schedule hide and opacity reset after fade complete
+          hugeTextEvents.push(setTimeout(hideHugeText,timing + 6100));
+        });
+        // Set timed triggers for text messages
         textMsgs.forEach(function(txtRow) {
           let txt = txtRow[0];
           let timing = txtRow[1];
+          // Schedule text display
           txtEvents.push(setTimeout(showTxt,timing,txt));
-          txtEvents.push(setTimeout(function() {
-            $("#hugewords").text("");
-            $("#hugewords").removeClass("txt");
-          },(timing + 3000)));
-        })
+          // Schedule text removal
+          txtEvents.push(setTimeout(hideTxt,timing + 3000));
+        });
       }
     });
 

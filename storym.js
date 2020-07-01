@@ -13,3 +13,13 @@ var hugeWords = [
 // CHANGEME maybe a second or two later, after story stops
   ['SMASHED IT',364500]
 ];
+var textMsgs = [
+  ["ru coming? internet is down<br/>and theres no music",24500],
+  ["omg u have to come.<br/>cammy is playing her parents cds",37000],
+  ["like bob dylan and a brass band",41250],
+  ["would you come and dj?<br/>i would really like that",49750],
+  ["please",70750],
+  ["ok",86750],
+  ["hurry everyone is gonna leave",101000],
+  ["hurry everyone is gonna leave",251000],
+];
