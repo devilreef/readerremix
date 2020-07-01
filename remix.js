@@ -347,11 +347,19 @@ $(document).ready(function() {
         $("#np3").text("[stopping]");
 
         // CHANGEME only activate this once sound stops
-        // and change deck labels to silent
         storyDeck.fadeOut();
         deck1.fadeOut();
         deck2.fadeOut();
         deck3.fadeOut();
+
+        // Change deck labels to silent
+        deck1.setTrack("silent");
+        deck2.setTrack("silent");
+        deck3.setTrack("silent");
+        $("#next1 select").val("silent");
+        $("#next2 select").val("silent");
+        $("#next3 select").val("silent");
+
         $("#play").text("PLAY");
         // Clean up scheduled huge text events
         hugeTextEvents.forEach(function(tmpEvent) {
@@ -375,8 +383,10 @@ $(document).ready(function() {
         $("#play").text("STOP");
         // Schedule progress bar updates
         progressID = setInterval(updateProgress, 50);
+
         // Play the story
         storyDeck.play();
+
         // Set timed triggers for huge text appearance
         hugeWords.forEach(function(hugeRow) {
           let hugeText = hugeRow[0];
@@ -386,6 +396,7 @@ $(document).ready(function() {
           // Schedule hide and opacity reset after fade complete
           hugeTextEvents.push(setTimeout(hideHugeText,timing + 6100));
         });
+
         // Set timed triggers for text messages
         textMsgs.forEach(function(txtRow) {
           let txt = txtRow[0];
