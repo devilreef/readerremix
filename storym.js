@@ -1,7 +1,19 @@
-// Male voice configuration
+// So you want to make your own version of Reader Remix? Great. It's easier
+// than it looks. In this file, lines which begin with // are just comments
+// to help you understand the file. You can add your own comments if you want.
 
+// You need a recording of your story, and if you want to change the music,
+// you also need new music loops. They all need to be MP3 files. Make a new
+// folder beside this file to put them, or just use the folder "audio" which
+// is already there.
+
+// What's the name of the folder where the audio is stored?
+// You need to put quotes around its filename like this:
+var loopFolder = "audio";
+
+// What's the name of the file which is the recording of your story?
 var storyFile = "storym.mp3"
-var storyLength = 368013;
+
 // Words to appear, milliseconds after story starts
 var hugeWords = [
   ['GOOD ENOUGH EXCUSE',13000],
@@ -23,9 +35,6 @@ var textMsgs = [
   ["hurry everyone is gonna leave",101000],
   ["hurry everyone is gonna leave",251000],
 ];
-
-// The name of the folder where the audio is stored
-var loopFolder = "audio";
 
 // The loop length in milliseconds
 var loopLength = 3997;

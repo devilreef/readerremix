@@ -1,5 +1,8 @@
 "use strict";
 
+// We'll calculate this once the story is loaded
+let storyLength = 0;
+
 // Story ////////////////////////////////////////////////////////////////////
 // Constructor prepares the audio
 
@@ -16,6 +19,8 @@ function Story(storyFile) {
     // OK, everything is loaded, we can go live
 //    console.log("LOADED");
 //    console.log(storyAudio.duration());
+// Convert to milliseconds
+    storyLength = storyAudio.duration() * 1000;
     $("#launch").removeClass("unready");
     $("#launch").addClass("ready");
     $("#launch").text("Launch");
