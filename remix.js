@@ -1,42 +1,5 @@
 "use strict";
 
-// The name of the folder where the audio is stored
-var loopFolder = "audio";
-
-// The loop length in milliseconds
-var loopLength = 3997;
-
-var drums = [
-  ['4OnTheFloor','4onfloor.mp3'],
-  ['4Straight','4straight.mp3'],
-  ['4Filler','4filler.mp3'],
-  ['4Square','4square.mp3'],
-  ['2Timed','2timed.mp3'],
-  ['2Cubed','2cubed.mp3'],
-];
-
-var bass = [
-  ['Punchy','punchy.mp3'],
-  ['Pulsey','pulsey.mp3'],
-  ['StraightUp','straightup.mp3'],
-  ['StraightOff','straightoff.mp3'],
-  ['WeRise','werise.mp3'],
-  ['Perky','perky.mp3'],
-];
-
-var tones = [
-  ['Safe','safe.mp3'],
-  ['Unsafe','unsafe.mp3'],
-  ['NightWalk','nightwalk.mp3'],
-  ['DayBreak','daybreak.mp3'],
-  ['AngelRain','angelrain.mp3'],
-  ['AngelTrain','angeltrain.mp3'],
-];
-
-var drumVolume = 1.0;
-var bassVolume = 1.0;
-var toneVolume = 0.85;
-
 // Story ////////////////////////////////////////////////////////////////////
 // Constructor prepares the audio
 
