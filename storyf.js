@@ -7,12 +7,17 @@
 // folder beside this file to put them, or just use the folder "audio" which
 // is already there. The story and the loops need to be in the same folder.
 
-// What's the name of the folder where the audio is stored?
+// What's the name of the folder where all the audio is stored?
 // You need to put quotes around its filename like this:
 var loopFolder = "audio";
 
 // What's the name of the file which is the recording of your story?
 var storyFile = "storyf.mp3"
+
+// What are your three decks called?
+var deck1Name = "DRUMS"
+var deck2Name = "BASS"
+var deck3Name = "TONES"
 
 // Words to appear, milliseconds after story starts
 var hugeWords = [

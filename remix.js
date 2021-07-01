@@ -19,7 +19,7 @@ function Story(storyFile) {
     // OK, everything is loaded, we can go live
 //    console.log("LOADED");
 //    console.log(storyAudio.duration());
-// Convert to milliseconds
+    // Convert to milliseconds
     storyLength = storyAudio.duration() * 1000;
     $("#launch").removeClass("unready");
     $("#launch").addClass("ready");
@@ -44,6 +44,7 @@ Story.prototype.stop = function() {
 function Deck(loopPack,selectorDiv,deckVolume) {
   // loopPack: array of all loops
   // selectorDiv: HTML id to place loop selector
+  // deckVolume: volume setting, range 0-1
   let audio;
   let nowplaying; // Howler ID of current loop
   let muted; // True if Mute toggle engaged
@@ -140,6 +141,11 @@ $(document).ready(function() {
     let deck3 = new Deck(tones,"#next3",toneVolume);
     let storyDeck = new Story(storyFile);
     let storyEnd;
+
+    // Set deck names
+    if (typeof deck1Name !== 'undefined') { $("#deck1label").text(deck1Name); }
+    if (typeof deck2Name !== 'undefined') { $("#deck2label").text(deck2Name); }
+    if (typeof deck3Name !== 'undefined') { $("#deck3label").text(deck3Name); }
 
     let channel1, channel2, channel3, timerID, progressID;
     let playing = false;
