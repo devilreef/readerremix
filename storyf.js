@@ -5,7 +5,7 @@
 // You need a recording of your story, and if you want to change the music,
 // you also need new music loops. They all need to be MP3 files. Make a new
 // folder beside this file to put them, or just use the folder "audio" which
-// is already there.
+// is already there. The story and the loops need to be in the same folder.
 
 // What's the name of the folder where the audio is stored?
 // You need to put quotes around its filename like this:
