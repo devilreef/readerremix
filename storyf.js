@@ -34,13 +34,13 @@ var deck3Name = "TONES";
 // These words will appear large and slowly fade out. Best keep them short,
 // about 20 characters total (counting both letters and spaces).
 var hugeWords = [
-  ['GOOD ENOUGH EXCUSE',13.000],
-  ['UH-OH',32.500],
-  ['FILE CORRUPT',196.000],
-  ['WEIRD CLOTHES',215.000],
-  ['SORT OF SMELLS',233.250],
-  ['GO HOME',260.500],
-  ['SMASHED IT',395.500]
+  ["GOOD ENOUGH EXCUSE",13.000],
+  ["UH-OH",32.500],
+  ["FILE CORRUPT",196.000],
+  ["WEIRD CLOTHES",215.000],
+  ["SORT OF SMELLS",233.250],
+  ["GO HOME",260.500],
+  ["SMASHED IT",395.500]
 ];
 
 // These words will appear smaller and disappear faster. You can use two
@@ -60,30 +60,30 @@ var textMsgs = [
 var loopLength = 3997;
 
 var drums = [
-  ['4OnTheFloor','4onfloor.mp3'],
-  ['4Straight','4straight.mp3'],
-  ['4Filler','4filler.mp3'],
-  ['4Square','4square.mp3'],
-  ['2Timed','2timed.mp3'],
-  ['2Cubed','2cubed.mp3'],
+  ["4OnTheFloor","4onfloor.mp3"],
+  ["4Straight","4straight.mp3"],
+  ["4Filler","4filler.mp3"],
+  ["4Square","4square.mp3"],
+  ["2Timed","2timed.mp3"],
+  ["2Cubed","2cubed.mp3"],
 ];
 
 var bass = [
-  ['Punchy','punchy.mp3'],
-  ['Pulsey','pulsey.mp3'],
-  ['StraightUp','straightup.mp3'],
-  ['StraightOff','straightoff.mp3'],
-  ['WeRise','werise.mp3'],
-  ['Perky','perky.mp3'],
+  ["Punchy","punchy.mp3"],
+  ["Pulsey","pulsey.mp3"],
+  ["StraightUp","straightup.mp3"],
+  ["StraightOff","straightoff.mp3"],
+  ["WeRise","werise.mp3"],
+  ["Perky","perky.mp3"],
 ];
 
 var tones = [
-  ['Safe','safe.mp3'],
-  ['Unsafe','unsafe.mp3'],
-  ['NightWalk','nightwalk.mp3'],
-  ['DayBreak','daybreak.mp3'],
-  ['AngelRain','angelrain.mp3'],
-  ['AngelTrain','angeltrain.mp3'],
+  ["Safe","safe.mp3"],
+  ["Unsafe","unsafe.mp3"],
+  ["NightWalk","nightwalk.mp3"],
+  ["DayBreak","daybreak.mp3"],
+  ["AngelRain","angelrain.mp3"],
+  ["AngelTrain","angeltrain.mp3"],
 ];
 
 var drumVolume = 1.0;
