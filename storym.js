@@ -7,17 +7,24 @@
 // folder beside this file to put them, or just use the folder "audio" which
 // is already there. The story and the loops need to be in the same folder.
 
+// Once you've got the mp3s ready, edit this file. It might look intimidating
+// but you can edit it without understanding the language, which is
+// Javascript. The main thing that might trip you up is the syntax: all the
+// quotes and commas and square brackets need to be there. Just go slow,
+// maybe change one thing at a time, and if the page stops working, you
+// probably missed a quote or something.
+
 // What's the name of the folder where all the audio is stored?
 // You need to put quotes around its filename like this:
 var loopFolder = "audio";
 
 // What's the name of the file which is the recording of your story?
-var storyFile = "storym.mp3"
+var storyFile = "storym.mp3";
 
 // What are your three decks called?
-var deck1Name = "DRUMS"
-var deck2Name = "BASS"
-var deck3Name = "TONES"
+var deck1Name = "DRUMS";
+var deck2Name = "BASS";
+var deck3Name = "TONES";
 
 // You can set words to appear during the story in two different ways.
 // On each line, list the words inside quotes, then how many seconds
