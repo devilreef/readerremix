@@ -19,26 +19,34 @@ var deck1Name = "DRUMS"
 var deck2Name = "BASS"
 var deck3Name = "TONES"
 
-// Words to appear, milliseconds after story starts
+// You can set words to appear during the story in two different ways.
+// On each line, list the words inside quotes, then how many seconds
+// before they appear. So if you want words to appear after 2 minutes and
+// 20 seconds, the number should be (60+60+20) = 140 seconds.
+
+// These words will appear large and slowly fade out. Best keep them short,
+// about 20 characters total (counting both letters and spaces).
 var hugeWords = [
-  ['GOOD ENOUGH EXCUSE',13000],
-  ['UH-OH',30500],
-  ['FILE CORRUPT',179250],
-  ['WEIRD CLOTHES',196750],
-  ['SORT OF SMELLS',213250],
-  ['GO HOME',236750],
-// CHANGEME maybe a second or two later, after story stops
-  ['SMASHED IT',364500]
+  ['GOOD ENOUGH EXCUSE',13.000],
+  ['UH-OH',30.500],
+  ['FILE CORRUPT',179.250],
+  ['WEIRD CLOTHES',196.750],
+  ['SORT OF SMELLS',213.250],
+  ['GO HOME',236.750],
+  ['SMASHED IT',364.500]
 ];
+
+// These words will appear smaller and disappear faster. You can use two
+// lines if you like; mark the line break with the code <br/>
 var textMsgs = [
-  ["ru coming? internet is down<br/>and theres no music",24500],
-  ["omg u have to come.<br/>cammy is playing her parents cds",37000],
-  ["like bob dylan and a brass band",41250],
-  ["would you come and dj?<br/>i would really like that",49750],
-  ["please",70750],
-  ["ok",86750],
-  ["hurry everyone is gonna leave",101000],
-  ["hurry everyone is gonna leave",251000],
+  ["ru coming? internet is down<br/>and theres no music",24.500],
+  ["omg u have to come.<br/>cammy is playing her parents cds",37.000],
+  ["like bob dylan and a brass band",41.250],
+  ["would you come and dj?<br/>i would really like that",49.750],
+  ["please",70.750],
+  ["ok",86.750],
+  ["hurry everyone is gonna leave",101.000],
+  ["hurry everyone is gonna leave",251.000],
 ];
 
 // The loop length in milliseconds

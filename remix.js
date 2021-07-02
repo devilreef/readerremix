@@ -364,7 +364,7 @@ $(document).ready(function() {
         // Set timed triggers for huge text appearance
         hugeWords.forEach(function(hugeRow) {
           let hugeText = hugeRow[0];
-          let timing = hugeRow[1];
+          let timing = hugeRow[1] * 1000;
           // Schedule showing the text
           hugeTextEvents.push(setTimeout(showHugeText,timing,hugeText));
           // Schedule hide and opacity reset after fade complete
@@ -374,7 +374,7 @@ $(document).ready(function() {
         // Set timed triggers for text messages
         textMsgs.forEach(function(txtRow) {
           let txt = txtRow[0];
-          let timing = txtRow[1];
+          let timing = txtRow[1] * 1000;
           // Schedule text display
           txtEvents.push(setTimeout(showTxt,timing,txt));
           // Schedule text removal
