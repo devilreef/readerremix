@@ -13,7 +13,6 @@ function Story(storyFile) {
     // Force HTML Audio for longer file
     html5: true,
   });
-//    html5: true,
   this.storyAudio = storyAudio;
   this.storyAudio.once('load', function() {
     // OK, everything is loaded, we can go live
